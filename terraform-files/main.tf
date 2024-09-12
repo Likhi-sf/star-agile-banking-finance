@@ -11,7 +11,7 @@ resource "aws_instance" "Prod-server" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("./keypair2.pem")
+    private_key = file(".practice key.pem")
     host = self.public_ip
   }
   provisioner "remote-exec"{
@@ -21,7 +21,7 @@ resource "aws_instance" "Prod-server" {
   command = "echo ${aws_instance.Prod-server.public_ip} > inventory"
   }
   provisioner "local-exec" {
-     command = "ansible-playbook /var/lib/jenkins/workspace/Care-Health/terraform-files/ansibleplaybook.yml"
+     command = "/var/lib/jenkins/workspace/project-pipeline/ansibleplaybook.yml"
   }
 }
   
