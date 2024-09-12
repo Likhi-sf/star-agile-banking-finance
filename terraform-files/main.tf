@@ -1,5 +1,5 @@
 resource "aws_instance" "Prod-server" {
-  ami           = "ami-0e86e20dae9224db8"  
+  ami           = "ami-0522ab6e1ddcc7055"  
   instance_type = "t2.micro"
   key_name = "practice Key"
   vpc_security_group_ids = ["sg-030ed4287a6e0b6c7"]
@@ -19,7 +19,7 @@ resource "aws_instance" "Prod-server" {
   command = "echo ${aws_instance.Prod-server.public_ip} > inventory"
   }
   provisioner "local-exec" {
-     command = "/var/lib/jenkins/workspace/project-pipeline/ansibleplaybook.yml"
+     command = "/var/lib/jenkins/workspace/project-pipeline/terraform-files/ansibleplaybook.yml"
   }
 }
   
