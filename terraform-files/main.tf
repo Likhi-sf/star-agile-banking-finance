@@ -2,7 +2,7 @@ resource "aws_instance" "Prod-server" {
   ami           = "ami-0e86e20dae9224db8"  
   instance_type = "t2.micro"
   key_name = "practice Key"
-  vpc_security_group_ids = ["sg-00bd58231a14bfc2c"]
+  vpc_security_group_ids = ["sg-030ed4287a6e0b6c7"]
   tags = {
     Name = "Prod-server"
   }
