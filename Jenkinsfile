@@ -19,13 +19,13 @@ pipeline {
             }
         }
 
-        stage(generate report){
+        stage('generate report'){
             steps{
                 publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/project-pipeline/target/surefire-reports', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: '', useWrapperFileDirectly: true])
             }
         }
 
-        stage(create Docker image){
+        stage('create Docker image'){
             steps{
                 sh 'docker build -t likithlikhi8/financeproject:v1 .' 
             }
