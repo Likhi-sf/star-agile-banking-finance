@@ -30,5 +30,19 @@ pipeline {
                 sh 'docker build -t likithlikhi8/financeproject:v1 .' 
             }
         }
+
+        stage('docker hub login'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'Git-creds', passwordVariable: 'password', usernameVariable: 'docker hub')]) {
+                sh 'docker login -u ${docker hub} -p ${password}'
+                }
+            }
+        }
+
+        stage('docker push'){
+            steps{
+                sh 'docker push likithlikhi8/financeproject:v1'
+            }
+        }
     }
 }
