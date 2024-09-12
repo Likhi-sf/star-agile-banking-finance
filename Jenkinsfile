@@ -4,37 +4,6 @@ pipeline {
 
     stages {
         stage('git clone') {
-          
-            
+            git credentialsId: 'Git-creds', url: 'https://github.com/Likhi-sf/star-agile-banking-finance.git'
         }
-
-        stage('Build') {
-            
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    // Test commands
-                    sh 'npm test'
-                }
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                script {
-                    // Deploy commands
-                    sh './deploy.sh'
-                }
-            }
-        }
-    }
-
-    post {
-        always {
-            // Actions to always execute (e.g., cleanup)
-            cleanWs()
-        }
-    }
 }
