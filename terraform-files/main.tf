@@ -11,7 +11,8 @@ resource "aws_instance" "Prod-server" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = file("C:\Users\Likith C\OneDrive\Documents\StarAgile\practice Key.pem")
+    private_key = file("C:/Users/Likith C/OneDrive/Documents/StarAgile/practice Key.pem")
+")
     host = self.public_ip
   }
   provisioner "remote-exec"{
