@@ -14,3 +14,60 @@
 
   - name: Deploy Docker Container
     command: docker run -itd -p 8084:8081 likithlikhi8/financeproject:v1 
+  - name: Update apt repository and install dependencies
+      apt:
+        update_cache: yes
+        name:
+          - curl
+          - software-properties-common
+        state: present
+
+    - name: Add Prometheus repository
+      apt_repository:
+        repo: 'deb https://prometheus.io/downloads/apt/ ubuntu main'
+        state: present
+
+    - name: Install Prometheus
+      apt:
+        name: prometheus
+        state: present
+
+    - name: Install Prometheus node exporter
+      apt:
+        name: prometheus-node-exporter
+        state: present
+
+    - name: Create Prometheus configuration file
+      copy:
+        dest: /etc/prometheus/prometheus.yml
+        content: |
+          global:
+            scrape_interval: 15s
+          scrape_configs:
+            - job_name: 'prometheus'
+              static_configs:
+                - targets: ['localhost:9090']
+          # Add other scrape configs here
+
+    - name: Restart Prometheus service
+      systemd:
+        name: prometheus
+        state: restarted
+        enabled: yes
+
+    - name: Add Grafana APT repository
+      apt_repository:
+        repo: 'deb https://packages.grafana.com/oss/deb stable main'
+        state: present
+        filename: grafana
+
+    - name: Install Grafana
+      apt:
+        name: grafana
+        state: present
+
+    - name: Start and enable Grafana service
+      systemd:
+        name: grafana-server
+        state: started
+        enabled: yes
