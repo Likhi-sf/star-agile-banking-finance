@@ -14,14 +14,7 @@
 
   - name: Deploy Docker Container
     command: docker run -itd -p 8084:8081 likithlikhi8/financeproject:v1 
-  - name: Update apt repository and install dependencies
-      apt:
-        update_cache: yes
-        name:
-          - curl
-          - software-properties-common
-        state: present
-
+  
   - name: Add Prometheus repository
       apt_repository:
         repo: 'deb https://prometheus.io/downloads/apt/ ubuntu main'
